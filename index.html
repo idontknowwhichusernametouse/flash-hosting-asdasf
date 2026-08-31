@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Flash Game</title>
+
+    <script src="./ruffle/ruffle.js"></script>
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        ruffle-player {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        #message {
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="message">Loading...</div>
+
+<script>
+    const message = document.getElementById("message");
+
+    /*
+     * You can specify a game in either of these ways:
+     *
+     * Query:
+     * ?game=game1.swf
+     *
+     * Hash:
+     * #game=game1.swf
+     */
+
+    const query = new URLSearchParams(window.location.search);
+    const hash = new URLSearchParams(
+        window.location.hash.substring(1)
+    );
+
+    const game = query.get("game") || hash.get("game");
+
+    if (!game) {
+        message.textContent =
+            "No game was specified. Add ?game=yourgame.swf to the URL.";
+    } else if (
+        game.includes("..") ||
+        game.startsWith("/") ||
+        game.includes("\\")
+    ) {
+        message.textContent = "Invalid game name.";
+    } else {
+
+        const player = document.createElement("ruffle-player");
+
+        player.setAttribute(
+            "src",
+            "./games/" + game
+        );
+
+        player.setAttribute("width", "100%");
+        player.setAttribute("height", "100%");
+
+        message.remove();
+        document.body.appendChild(player);
+    }
+</script>
+
+</body>
+</html>
