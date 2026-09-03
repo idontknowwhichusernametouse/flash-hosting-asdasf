@@ -71,6 +71,13 @@
             const ruffle = window.RufflePlayer.newest();
             const player = ruffle.createPlayer();
 
+            player.config = {
+                allowNetworking: "all",
+                allowScriptAccess: true,
+                allowFullscreen: true,
+                autoplay: "on"
+            };
+
             player.style.width = "100%";
             player.style.height = "100%";
 
