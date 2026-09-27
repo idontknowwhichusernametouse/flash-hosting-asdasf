@@ -38,7 +38,7 @@
 
 <body>
 
-<div id="message">Starting Ruffle...</div>
+<div id="message">starting Ruffle</div>
 
 <script>
     async function start() {
@@ -51,7 +51,7 @@
             message.textContent =
                 "No game specified.\n\n" +
                 "Example:\n" +
-                "?game=bad-piggies-38.swf";
+                "?game=[insert swf file that is in the games folder]";
             return;
         }
 
@@ -59,11 +59,11 @@
             "Game requested:\n" + game + "\n\n" +
             "Checking Ruffle...";
 
-        // Check whether Ruffle loaded.
+        // ts is for checking if ruffle loaded properly
         if (!window.RufflePlayer) {
             message.textContent =
-                "ERROR: RufflePlayer was not found.\n\n" +
-                "ruffle.js loaded, but Ruffle did not initialize.";
+                "Error: Ruffle was not found.\n\n" +
+                "ruffle.js initialized but Ruffle does not run";
             return;
         }
 
